@@ -36,14 +36,46 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
+            //запретить стандартные URL если не соответствует правилам класса
+            //'enableStrictParsing' => true,
             'rules' => [
+                /*                'page-<page:\d+>' => 'post/index', //пагинация для главной страницы
+                                '/' => 'post/index', //главная страница
+
+                                'site/captcha' => 'site/captcha', //для капчи ничего не меняем
+                                'sitemap.xml' => 'site/sitemap', //карта сайта
+
+                                'posts/page-<page:\d+>' => 'post/posts', //пагинация для статей
+                                'posts' => 'post/posts', //статьи
+
+                             //вывод статичных страниц
+                                [
+                                    'pattern'=>'<action:about|service|contact>',
+                                    'route' => 'site/<action>',
+                                    'suffix' => '.html',
+                                ],
+                  */
+                //login|logout|signup и тд.
+             //   '<action:\w+>' => 'site/<action>',
+
+                /*                //вывод отдельной страницы
+                                [
+                                    'pattern'=>'<url:\w+>',
+                                    'route' => 'site/view',
+                                    'suffix' => '.html',
+                                ],
+                                /*
+                /*
+                                              'category/<url:\w+>' => 'category/view', //рубрики
+                                              'tag/<url:\w+>' => 'tag/view', //метки
+                                          */
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

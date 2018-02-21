@@ -19,8 +19,9 @@ use yii\widgets\LinkPager;
                                     <header class="entry-header text-uppercase">
 
                                         <h1 class="entry-title"><a
-                                                href="<?= Url::toRoute(['site/view', 'id' => $post->id]); ?>">Home is
-                                                peaceful place</a></h1>
+                                                href="<?= Url::toRoute(['site/view', 'id' => $post->id]) ?>"><?= $post->title ?></a>
+                                        </h1>
+                                        
                                     </header>
                                     <div class="entry-content">
                                         <p><?= $post->content ?>

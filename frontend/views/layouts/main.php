@@ -52,13 +52,17 @@ AppAsset::register($this);
                 <div class="i_con">
                     <ul class="nav navbar-nav text-uppercase">
                         <?php if (Yii::$app->user->isGuest): ?>
-                            <li><a href="<?= Url::toRoute(['site/login']) ?>">Login</a></li>
+                           <!-- <li><a href="<?/*= Url::toRoute(['site/login']) */?>">Login</a></li>-->
+                            <li><a href="/backend/web">Login</a></li>
                             <li><a href="<?= Url::toRoute(['site/signup']) ?>">Register</a></li>
+
                         <?php else: ?>
+
+<!--                            <span style="float: left; margin-left: -120px; margin-top: 9px; "><a href="/backend/web/">Admin Panel</a></span>-->
                             <?= Html::beginForm(['/site/logout'], 'post')
                             . Html::submitButton(
                                 'Logout (' . Yii::$app->user->identity->username . ')',
-                                ['class' => 'btn btn-link logout', 'style' => "padding-top:10px;"]
+                                ['class' => 'btn btn-link logout', 'style' => " padding-top:10px;"]
                             )
                             . Html::endForm() ?>
                         <?php endif; ?>

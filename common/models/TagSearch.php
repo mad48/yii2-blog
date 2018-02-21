@@ -5,7 +5,7 @@ namespace common\models;
 use yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tag;
+use common\models\Tag;
 
 
 class TagSearch extends Tag

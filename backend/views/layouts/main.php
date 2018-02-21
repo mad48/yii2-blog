@@ -29,18 +29,22 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => "Home", /*Yii::$app->name,*/
-        'brandUrl' => "/"/*Yii::$app->homeUrl*/,
+        'brandLabel' => "Blog", /*Yii::$app->name,*/
+        'brandUrl' => "/frontend/web/"/*Yii::$app->homeUrl*/,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Posts', 'url' => ['/post/index']],
+            ['label' => 'Categories', 'url' => ['/category/index']],
+            ['label' => 'Tags', 'url' => ['/tag/index']]
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
