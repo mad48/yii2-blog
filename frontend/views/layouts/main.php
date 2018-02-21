@@ -3,21 +3,22 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -26,54 +27,66 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
+<nav class="navbar main-menu navbar-default">
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="menu-content">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" href="/"><img src="/images/logo.jpg" alt=""></a>-->
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav text-uppercase">
+                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="/">Home</a></li>
+                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="/frontend/web/">Blog</a></li>
+                </ul>
+                <div class="i_con">
+                    <ul class="nav navbar-nav text-uppercase">
+                        <?php if (Yii::$app->user->isGuest): ?>
+                            <li><a href="<?= Url::toRoute(['site/login']) ?>">Login</a></li>
+                            <li><a href="<?= Url::toRoute(['site/signup']) ?>">Register</a></li>
+                        <?php else: ?>
+                            <?= Html::beginForm(['/site/logout'], 'post')
+                            . Html::submitButton(
+                                'Logout (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'btn btn-link logout', 'style' => "padding-top:10px;"]
+                            )
+                            . Html::endForm() ?>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
     </div>
-</div>
+    <!-- /.container-fluid -->
+</nav>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<?= $content ?>
+
+
+<footer id="footer" class="footer-widget-section">
+
+    <div class="footer-copy">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">&copy; 2018 Yii2 Blog
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 
