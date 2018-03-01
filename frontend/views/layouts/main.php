@@ -47,13 +47,14 @@ AppAsset::register($this);
 
                 <ul class="nav navbar-nav text-uppercase">
                     <li><a data-toggle="dropdown" class="dropdown-toggle" href="/">Home</a></li>
-                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="/frontend/web/">Blog</a></li>
+                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="/blog">Blog</a></li>
                 </ul>
                 <div class="i_con">
                     <ul class="nav navbar-nav text-uppercase">
                         <?php if (Yii::$app->user->isGuest): ?>
-                           <!-- <li><a href="<?/*= Url::toRoute(['site/login']) */?>">Login</a></li>-->
-                            <li><a href="/backend/web">Login</a></li>
+                          <!-- <li><a href="<?/*= Url::toRoute(['site/login']) */?>">Login</a></li>-->
+
+                            <li><a href="<?= Url::to(['@admin']) ?>">Login</a></li>
                             <li><a href="<?= Url::toRoute(['site/signup']) ?>">Register</a></li>
 
                         <?php else: ?>

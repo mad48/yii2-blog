@@ -14,6 +14,14 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'baseUrl' => '',
+        ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'RUB',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -38,11 +46,16 @@ return [
         ],
 
         'urlManager' => [
-            'enablePrettyUrl' => false,
+            'enablePrettyUrl' => true,
             'showScriptName' => false,
             //запретить стандартные URL если не соответствует правилам класса
             //'enableStrictParsing' => true,
             'rules' => [
+                'blog/page/<page:\d+>' => 'blog/index',
+                'blog/' => 'blog/index',
+                //  '<controller:\w+>/<id>' => '<controller>/view',
+                //'blog/category/<id:\w+>/<name:\w+>' => 'blog/category/id/<id>/name/<name>/',
+                //     'blog/category/<id:\d+>' => 'category/index',
                 /*                'page-<page:\d+>' => 'post/index', //пагинация для главной страницы
                                 '/' => 'post/index', //главная страница
 
@@ -60,7 +73,7 @@ return [
                                 ],
                   */
                 //login|logout|signup и тд.
-             //   '<action:\w+>' => 'site/<action>',
+                //   '<action:\w+>' => 'site/<action>',
 
                 /*                //вывод отдельной страницы
                                 [

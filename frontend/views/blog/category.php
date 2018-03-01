@@ -19,7 +19,7 @@ use yii\widgets\LinkPager;
                                     <header class="entry-header text-uppercase">
 
                                         <h1 class="entry-title"><a
-                                                href="<?= Url::toRoute(['site/view', 'id' => $post->id]) ?>"><?= $post->title ?></a>
+                                                href="<?= Url::toRoute(['post', 'id' => $post->id]) ?>"><?= $post->title ?></a>
                                         </h1>
                                         
                                     </header>
@@ -29,7 +29,7 @@ use yii\widgets\LinkPager;
                                     </div>
                                     <div class="social-share">
                                         <span
-                                            class="social-share-title pull-left text-capitalize"><?= $post->getDate(); ?> /  <a href="<?= Url::toRoute(['site/category', 'id' => $post->category->id]) ?>"> <?= $post->category->title ?></a> /by <?= $post->author->username ?></span>
+                                            class="social-share-title pull-left text-capitalize"><?= Yii::$app->formatter->asDate($post->date) ?> /  <a href="<?= Url::toRoute(['category', 'id' => $post->category->id]) ?>"> <?= $post->category->title ?></a> /by <?= $post->author->username ?></span>
 
                                         <ul class="text-center pull-right">
 
@@ -44,7 +44,7 @@ use yii\widgets\LinkPager;
                             </div>
                         </div>
                     </post>
-                    <br><br>
+
                 <?php endforeach; ?>
 
                 <?php

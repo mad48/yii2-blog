@@ -10,7 +10,7 @@ use yii\helpers\Url;
             <ul>
                 <?php foreach ($categories as $category): ?>
                     <li>
-                        <a href="<?= Url::toRoute(['site/category', 'id' => $category->id]); ?>"><?= $category->title ?></a>
+                        <a href="<?= Url::toRoute(['blog/category', 'id' => $category->id]); ?>"><?= $category->title ?></a>
                         <span class="post-count pull-right"> (<?= $category->getPostsCount(); ?>)</span>
                     </li>
                 <?php endforeach; ?>

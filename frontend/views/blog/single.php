@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 
 
                             <h1 class="entry-title"><a
-                                    href="<?= Url::toRoute(['site/view', 'id' => $post->id]) ?>"><?= $post->title ?></a>
+                                    href="<?= Url::toRoute(['post', 'id' => $post->id]) ?>"><?= $post->title ?></a>
                             </h1>
 
 
@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
                         <div class="social-share">
 							<span
                                 class="social-share-title pull-left text-capitalize">
-                                <?= $post->getDate(); ?> /  <a href="<?= Url::toRoute(['site/category', 'id' => $post->category->id]) ?>"> <?= $post->category->title ?></a> /by <?= $post->author->username ?>
+                                <?= Yii::$app->formatter->asDate($post->date) ?> /  <a href="<?= Url::toRoute(['category', 'id' => $post->category->id]) ?>"> <?= $post->category->title ?></a> /by <?= $post->author->username ?>
                           </span>
                             <ul class="text-center pull-right">
 

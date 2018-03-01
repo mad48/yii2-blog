@@ -101,11 +101,11 @@ class Post extends \yii\db\ActiveRecord
     {
         PostTag::deleteAll(['post_id' => $this->id]);
     }
-
-    public function getDate()
-    {
-        return Yii::$app->formatter->asDate($this->date);
-    }
+    /*
+        public function getDate()
+        {
+            return Yii::$app->formatter->asDate($this->date);
+        }*/
 
     public static function getAll($pageSize = 5)
     {

@@ -1,26 +1,21 @@
 <?php
-
 namespace frontend\controllers;
 
 use yii;
-use yii\data\Pagination;
 use yii\base\InvalidParamException;
-use yii\filters\AccessControl;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-
-use yii\web\BadRequestHttpException;
-
+use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
-use common\models\Post;
-use common\models\Category;
-
-
+/**
+ * Site controller
+ */
 class SiteController extends Controller
 {
     /**
@@ -31,8 +26,13 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -68,44 +68,11 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {
-        $data = Post::getAll(3);
-
-        $categories = Category::getAll();
-
-        return $this->render('index', [
-            'posts' => $data['posts'],
-            'pagination' => $data['pagination'],
-            'categories' => $categories
-        ]);
-    }
-
-    public function actionView($id)
-    {
-        $post = Post::findOne($id);
-
-        $categories = Category::getAll();
-
-        return $this->render('single', [
-            'post' => $post,
-            'categories' => $categories,
-        ]);
-    }
-
-    public function actionCategory($id)
-    {
-
-        $data = Category::getPostsByCategory($id);
-        $categories = Category::getAll();
-
-        return $this->render('category', [
-            'posts' => $data['posts'],
-            'pagination' => $data['pagination'],
-            'categories' => $categories
-        ]);
+        return $this->render('/site/index');
     }
 
     /**

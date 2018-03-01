@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => "Blog", /*Yii::$app->name,*/
-        'brandUrl' => "/frontend/web/"/*Yii::$app->homeUrl*/,
+        'brandUrl' => "/blog"/*Yii::$app->homeUrl*/,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
