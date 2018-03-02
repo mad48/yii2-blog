@@ -38,33 +38,38 @@ class Category extends \yii\db\ActiveRecord
 
     public function getPosts()
     {
-        return $this->hasMany(Post::className(), ['category_id' => 'id']);
+        return $this->hasMany(Post::class, ['category_id' => 'id']);
     }
+
 
     public function getPostsCount()
     {
-        return $this->getPosts()->count();
+        return $this->getPosts()->where(['active' => true])->count();
     }
+
 
     public static function getAll()
     {
-        return Category::find()->all();
+        return Category::find()->orderBy(['title' => SORT_ASC])->all();
     }
+
 
     public static function getPostsByCategory($id)
     {
-        // build a DB query to get all posts
-        $query = Post::find()->where(['category_id' => $id]);
+        $query = Post::find()->where(['category_id' => $id, 'active' => true]);
 
-        // get the total number of posts (but do not fetch the post data yet)
-        $count = $query->count();
+        $pageSize = 3;
+        
+        $pagination = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $pageSize,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
 
-        // create a pagination object with the total count
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 6]);
-
-        // limit the query using the pagination and retrieve the posts
         $posts = $query->offset($pagination->offset)
             ->limit($pagination->limit)
+            ->orderBy(['date' => SORT_DESC])
             ->all();
 
         $data['posts'] = $posts;

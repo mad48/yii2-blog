@@ -101,27 +101,55 @@ class Post extends \yii\db\ActiveRecord
     {
         PostTag::deleteAll(['post_id' => $this->id]);
     }
+
     /*
         public function getDate()
         {
             return Yii::$app->formatter->asDate($this->date);
         }*/
 
-    public static function getAll($pageSize = 5)
+
+    public static function getPost($id)
     {
-        // build a DB query to get all posts
-        $query = Post::find();
+        $param = null;
 
-        // get the total number of posts (but do not fetch the post data yet)
-        $count = $query->count();
+        if (is_numeric($id)) {
+            $param = 'id';
+        } else {
+            $param = 'url';
+        }
 
-        // create a pagination object with the total count
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+        $post = Post::find()
+            ->with('author', 'category', 'tags')
+            ->where(['active' => true, $param => $id])
+            //->andWhere($param . ' = :id', [':id' => $id])
+            ->limit(1)
+            ->one();
 
-        // limit the query using the pagination and retrieve the posts
-        $posts = $query->offset($pagination->offset)
+        return $post;
+    }
+
+
+    public static function getAll($pageSize = 3)
+    {
+        // выбрать все активные для определения их количества для pagination
+        $query = Post::find()->where(['active' => true]);
+
+        $pagination = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $pageSize,
+            'forcePageParam' => false, // будет без page/1;  см. urlManager => rules
+            'pageSizeParam' => false // убирает per-page из url
+        ]);
+
+        // выбрать только отображаемые с учетом смещения на номер страницы
+        $posts = $query
+            ->with('author', 'category', 'tags')
+            ->offset($pagination->offset)
             ->limit($pagination->limit)
+            ->orderBy(['date' => SORT_DESC])
             ->all();
+
 
         $data['posts'] = $posts;
         $data['pagination'] = $pagination;

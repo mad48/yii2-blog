@@ -53,6 +53,8 @@ return [
             'rules' => [
                 'blog/page/<page:\d+>' => 'blog/index',
                 'blog/' => 'blog/index',
+                'blog/post/<id:\d+>' => 'blog/post',
+                'blog/<id:\w+>' => 'blog/post',
                 //  '<controller:\w+>/<id>' => '<controller>/view',
                 //'blog/category/<id:\w+>/<name:\w+>' => 'blog/category/id/<id>/name/<name>/',
                 //     'blog/category/<id:\d+>' => 'category/index',
