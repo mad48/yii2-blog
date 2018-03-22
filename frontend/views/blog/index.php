@@ -28,12 +28,12 @@ use yii\widgets\LinkPager;
 
                             </header>
                             <div class="entry-content">
-                                <p><?= $post->content ?>
-                                </p>
+                                <p><?= $post->content ?></p>
 
                                 <div class="btn-continue-reading text-center text-uppercase">
-                                    <a href="<?= Url::toRoute(['post', 'id' => $post->id]); ?>" class="more-link">Read
-                                        more</a>
+                                    <!-- <a href="<? /*= Url::toRoute(['post', 'id' => $post->id]); */ ?>" class="more-link">Read
+                                        more</a>-->
+                                    <?= yii\bootstrap\Html::a('Read more', ['post', 'id' => $post->url], ['class' => 'btn btn-primary']) ?>
                                 </div>
                             </div>
                             <div class="social-share">
@@ -58,7 +58,7 @@ use yii\widgets\LinkPager;
                             </div>
                         </div>
                     </post>
-                
+
                 <?php endforeach; ?>
 
                 <?php

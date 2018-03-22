@@ -20,7 +20,7 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 255],
+            [['title', 'slug'], 'string', 'max' => 200],
         ];
     }
 
@@ -32,6 +32,7 @@ class Tag extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'slug' => 'Slug',
         ];
     }
 
@@ -41,7 +42,7 @@ class Tag extends \yii\db\ActiveRecord
     
     public function getArticles()
     {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])
+        return $this->hasMany(Post::class, ['id' => 'post_id'])
             ->viaTable('post_tag', ['tag_id' => 'id']);
     }
 }

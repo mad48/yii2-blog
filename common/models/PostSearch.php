@@ -69,6 +69,7 @@ class PostSearch extends Post
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

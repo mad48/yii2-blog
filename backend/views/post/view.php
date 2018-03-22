@@ -1,8 +1,10 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\widgets\TagsWidget;
+
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
 
@@ -17,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?/*= Html::a('Set Tags', ['set-tags', 'id' => $model->id], ['class' => 'btn btn-default']) */?>
+        <? /*= Html::a('Set Tags', ['set-tags', 'id' => $model->id], ['class' => 'btn btn-default']) */ ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -27,24 +29,46 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+ 
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
-            'category_id',
+            //  'user_id',
+            [
+                'label' => 'Author',
+                'value' => $model->author->username,
+            ],
+
+            //    'category_id',
+            [
+                'label' => 'Сategory',
+                'value' => $model->category->title,
+            ],
+
             'title',
-            'content:ntext',
-            'url:url',
-            'active',
-            'date',
+            'content:html',
+            'url:text',
+            [
+                'label' => 'Active',
+                'value' => $model->statusName,
+            ],
+            [
+                'label' => 'Tags',
+
+
+                'value' => implode(', ', ArrayHelper::map($model->tags, 'id', 'title'))
+            ],
+
+            [
+                'label' => 'Date',
+                'value' => Yii::$app->formatter->asDate($model->date, 'php:d.m.Y H:i')
+            ],
+
+
         ],
     ]) ?>
-
-
-    <?= TagsWidget::widget(['tags' => $tags, 'selectedTags' => $selectedTags]) ?>
-
 
 
 </div>

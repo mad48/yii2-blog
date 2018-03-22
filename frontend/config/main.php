@@ -51,10 +51,13 @@ return [
             //запретить стандартные URL если не соответствует правилам класса
             //'enableStrictParsing' => true,
             'rules' => [
-                'blog/page/<page:\d+>' => 'blog/index',
                 'blog/' => 'blog/index',
+                'blog/page/<page:\d+>' => 'blog/index',
                 'blog/post/<id:\d+>' => 'blog/post',
-                'blog/<id:\w+>' => 'blog/post',
+                'blog/post/<id:\w+>' => 'blog/post',
+
+                'blog/category/<id:\w+>' => 'blog/category',
+              //  'blog/<id:\w+>' => 'blog/post',
                 //  '<controller:\w+>/<id>' => '<controller>/view',
                 //'blog/category/<id:\w+>/<name:\w+>' => 'blog/category/id/<id>/name/<name>/',
                 //     'blog/category/<id:\d+>' => 'category/index',

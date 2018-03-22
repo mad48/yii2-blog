@@ -12,6 +12,8 @@ use common\models\Post;
 use common\models\PostSearch;
 use common\models\Category;
 use common\models\Tag;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 
 /**
@@ -62,8 +64,15 @@ class PostController extends Controller
         $selectedTags = $model->getSelectedTags();
         $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
 
+        $model = Post::find()
+            ->with('author', 'category', 'tags')
+            ->where(['active' => true])
+            ->andWhere('id = :id', [':id' => $id])
+            ->limit(1)
+            ->one();
+
         return $this->render('view', [
-            'model' =>$model,
+            'model' => $model,
             'selectedTags' => $selectedTags,
             'tags' => $tags
         ]);
@@ -77,6 +86,11 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->savePost()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -99,6 +113,10 @@ class PostController extends Controller
 
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->savePost()) {
             return $this->redirect(['view', 'id' => $model->id]);

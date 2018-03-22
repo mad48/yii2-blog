@@ -51,7 +51,7 @@ class BlogController extends Controller
 
     public function actionPost($id)
     {
-        $post = Post::getPost($id);
+        $post = Post::getOne($id);
         $categories = Category::getAll();
 
         return $this->render('single', [
@@ -62,7 +62,6 @@ class BlogController extends Controller
 
     public function actionCategory($id)
     {
-
         $data = Category::getPostsByCategory($id);
         $categories = Category::getAll();
 

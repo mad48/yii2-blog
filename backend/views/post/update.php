@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use common\widgets\TagsWidget;
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
 
@@ -18,5 +18,8 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
         'categories' => $categories
     ]) ?>
+
+
+<?/*= TagsWidget::widget(['tags' => $tags, 'selectedTags' => $selectedTags]) */?>
 
 </div>

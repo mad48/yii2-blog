@@ -5,7 +5,7 @@ namespace common\models;
 use yii;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
-
+use yii\web\NotFoundHttpException;
 
 class Post extends \yii\db\ActiveRecord
 {
@@ -17,6 +17,7 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+
     /**
      * @inheritdoc
      */
@@ -26,11 +27,12 @@ class Post extends \yii\db\ActiveRecord
             [['user_id', 'category_id'], 'integer'],
             [['title'], 'required'],
             [['title', 'url'], 'string', 'max' => 255],
+            ['url', 'unique', 'targetAttribute' => ['url'], 'message' => 'url must be unique'],
             [['content'], 'string'],
             [['active'], 'string', 'max' => 1],
             [['date'], 'safe'],
-            [['date'], 'date', 'format' => 'php:Y-m-d'],
-            [['date'], 'default', 'value' => date('Y-m-d')],
+            [['date'], 'date', 'format' => 'php:Y-m-d H:i:s'],
+            [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
         ];
     }
 
@@ -50,6 +52,8 @@ class Post extends \yii\db\ActiveRecord
             'date' => 'Date',
         ];
     }
+
+
 
     public function savePost()
     {
@@ -72,6 +76,7 @@ class Post extends \yii\db\ActiveRecord
             return true;
         }
     }
+
 
     public function getTags()
     {
@@ -109,10 +114,11 @@ class Post extends \yii\db\ActiveRecord
         }*/
 
 
-    public static function getPost($id)
+    public static function getOne($id)
     {
         $param = null;
 
+        // экспериментальный вариант
         if (is_numeric($id)) {
             $param = 'id';
         } else {
@@ -126,7 +132,12 @@ class Post extends \yii\db\ActiveRecord
             ->limit(1)
             ->one();
 
-        return $post;
+        if (is_null($post)) {
+            // если пост не найден - 404
+            throw new NotFoundHttpException('Post not found');
+        } else {
+            return $post;
+        }
     }
 
 
@@ -163,4 +174,13 @@ class Post extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
+    public static function getStatuses()
+    {
+        return [0 => "off", 1 => "on"];
+    }
+
+    public function getStatusName()
+    {
+        return $this->getStatuses()[$this->active];
+    }
 }

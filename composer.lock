@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "630d5f1d19e73b0163f900453171fba5",
+    "content-hash": "c25111560a1b6d238ebe5e4daf843843",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -215,6 +215,54 @@
             "time": "2017-06-03T02:28:16+00:00"
         },
         {
+            "name": "insolita/yii2-migration-generator",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Insolita/yii2-migrik.git",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Insolita/yii2-migrik/zipball/455c8dfc035085d56051a16b3cfc5f010662170d",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "nesbot/carbon": "*",
+                "vlucas/phpdotenv": "*",
+                "yiisoft/yii2-gii": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "insolita\\migrik\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "insolita\\migrik\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "insolita",
+                    "email": "donnainsolita@gmail.com"
+                }
+            ],
+            "description": "Set of gii tools for generating  files for migration by schema of table , phpdoc or table data",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2017-04-29T12:37:47+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.9",
             "source": {
@@ -267,6 +315,61 @@
                 "mailer"
             ],
             "time": "2018-01-23T07:37:21+00:00"
+        },
+        {
+            "name": "vova07/yii2-imperavi-widget",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vova07/yii2-imperavi-widget.git",
+                "reference": "45eec82605e30507545e7da86b3341eb39e82f1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/45eec82605e30507545e7da86b3341eb39e82f1e",
+                "reference": "45eec82605e30507545e7da86b3341eb39e82f1e",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "~1",
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vova07\\imperavi\\": "src",
+                    "vova07\\imperavi\\tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Crudu Vasile",
+                    "email": "bazillio07@yandex.ru",
+                    "homepage": "https://github.com/vova07",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The imperavi redactor widget for Yii 2 framework.",
+            "homepage": "https://github.com/vova07/yii2-imperavi-widget",
+            "keywords": [
+                "Redactor",
+                "extension",
+                "imperavi",
+                "widget",
+                "wysiwyg",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2018-01-28T19:57:16+00:00"
         },
         {
             "name": "yiisoft/yii2",
