@@ -45,4 +45,10 @@ class Tag extends \yii\db\ActiveRecord
         return $this->hasMany(Post::class, ['id' => 'post_id'])
             ->viaTable('post_tag', ['tag_id' => 'id']);
     }
+
+    public static function getAll()
+    {
+        return Tag::find()->orderBy(['title' => SORT_ASC])->all();
+    }
+
 }

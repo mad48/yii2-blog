@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
- 
+
 
     <?= DetailView::widget([
         'model' => $model,
@@ -56,8 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Tags',
-
-
                 'value' => implode(', ', ArrayHelper::map($model->tags, 'id', 'title'))
             ],
 

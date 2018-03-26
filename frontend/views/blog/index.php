@@ -41,7 +41,8 @@ use yii\widgets\LinkPager;
                                 <span
                                     class="social-share-title pull-left text-capitalize">
                                   
-                                   <?= Yii::$app->formatter->asDate($post->date) ?> /
+                                    <!--  --><? /*= $curTime = Yii::$app->formatter->asDateTime(new \DateTime('NOW'), 'yyyy-MM-dd HH:mm:ss');*/ ?>
+                                    <?= Yii::$app->formatter->asDatetime($post->date) ?> /
                                     <a href="<?= Url::toRoute(['category', 'id' => $post->category->id]) ?>">
                                         <?= $post->category->title ?>
                                     </a>

@@ -17,6 +17,8 @@ return [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin',
         ],
+
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -45,7 +47,7 @@ return [
             'rules' => [
             ],
         ],
-    
+
     ],
     'params' => $params,
 ];

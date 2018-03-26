@@ -16,13 +16,13 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '',
         ],
-        'formatter' => [
+/*        'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'dateFormat' => 'dd.MM.yyyy',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'RUB',
-        ],
+        ],*/
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

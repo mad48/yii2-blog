@@ -1,9 +1,11 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use vova07\imperavi\Widget;
 
+use common\models\Tag;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
@@ -35,6 +37,18 @@ use vova07\imperavi\Widget;
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, "active")->checkbox(); ?>
+
+    <?= $form->field($model, 'tags_array')->widget(\kartik\select2\Select2::class, [
+        'data' => ArrayHelper::map(Tag::getAll(), 'id', 'title'),
+        'value' => ArrayHelper::map($model->tags, 'id', 'title'),
+        'language' => 'ru',
+        'options' => ['placeholder' => 'Select a tag ...', 'multiple' => true],
+        'pluginOptions' => [
+            'allowClear' => true,
+            'tags' => true
+        ],
+    ]);
+    ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 

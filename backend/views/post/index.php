@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             //'content:ntext',
             //'url:text',
-            ['attribute' => 'url', 'format' => 'text'],
+            //['attribute' => 'url', 'format' => 'text'],
             ['attribute' => 'active', 'filter' => Post::getStatuses(), 'value' => 'statusName'],
 
             'date',

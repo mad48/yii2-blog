@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c25111560a1b6d238ebe5e4daf843843",
+    "content-hash": "911d80bf6fc35c6e42e613d3c933d919",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -261,6 +261,110 @@
                 "yii2"
             ],
             "time": "2017-04-29T12:37:47+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-krajee-base",
+            "version": "v1.8.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-krajee-base.git",
+                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0cafe6376780cedcd00f52c9d82b172d5851f6b0",
+                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2-bootstrap": "@dev"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\base\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Base library and foundation components for all Yii2 Krajee extensions.",
+            "homepage": "https://github.com/kartik-v/yii2-krajee-base",
+            "keywords": [
+                "base",
+                "extension",
+                "foundation",
+                "krajee",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-09-29T06:18:14+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-select2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-select2.git",
+                "reference": "d08a5b302fe04216bd04290f0e99e26386801a37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/d08a5b302fe04216bd04290f0e99e26386801a37",
+                "reference": "d08a5b302fe04216bd04290f0e99e26386801a37",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\select2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-select2",
+            "keywords": [
+                "dropdown",
+                "extension",
+                "form",
+                "jquery",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-02-24 05:28:25"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -630,6 +734,97 @@
                 "yii2"
             ],
             "time": "2017-05-01T08:29:00+00:00"
+        },
+        {
+            "name": "zelenin/string",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/string.git",
+                "reference": "d57f21f32d2b2eb52e96e892500afaeb0b3fac19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/string/zipball/d57f21f32d2b2eb52e96e892500afaeb0b3fac19",
+                "reference": "d57f21f32d2b2eb52e96e892500afaeb0b3fac19",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\Ddd\\String\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "String transformers collection",
+            "homepage": "https://github.com/zelenin/string",
+            "keywords": [
+                "ddd",
+                "slug",
+                "string",
+                "translit"
+            ],
+            "time": "2015-12-23T00:06:30+00:00"
+        },
+        {
+            "name": "zelenin/yii2-slug-behavior",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/yii2-slug-behavior.git",
+                "reference": "e40f370c55825a2ea65ef0e47c6f7c46b7703485"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/yii2-slug-behavior/zipball/e40f370c55825a2ea65ef0e47c6f7c46b7703485",
+                "reference": "e40f370c55825a2ea65ef0e47c6f7c46b7703485",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.7",
+                "zelenin/string": "~0.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\yii\\behaviors\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 slug behavior",
+            "homepage": "https://github.com/zelenin/yii2-slug-behavior",
+            "keywords": [
+                "Behavior",
+                "slug",
+                "yii2"
+            ],
+            "time": "2016-02-14T21:37:51+00:00"
         }
     ],
     "packages-dev": [
@@ -3053,7 +3248,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-widget-select2": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
