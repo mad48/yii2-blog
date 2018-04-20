@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use yii;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -24,6 +25,8 @@ class PostController extends Controller
     /**
      * @inheritdoc
      */
+
+
     public function behaviors()
     {
         return [
@@ -33,9 +36,42 @@ class PostController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['author'],
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['updatePost'],
+                        'roleParams' => ['post' => Post::findOne(['id' => Yii::$app->request->get('id')])],
+                        /* 'roleParams' => function() {
+                             return ['post' => Post::findOne(['id' => Yii::$app->request->get('id')])];
+                         },*/
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
         ];
     }
-
 
     /**
      * Lists all Post models.
@@ -45,6 +81,18 @@ class PostController extends Controller
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider->setSort([
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ]
+        ]);
+
+        $dataProvider->setPagination([
+            'pageSize' => 10,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -59,23 +107,29 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
+        // $model = $this->findModel($id);
 
-        $selectedTags = $model->getSelectedTags();
-        $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
+        //   $selectedTags = $model->getSelectedTags();
+        //   $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
 
         $model = Post::find()
             ->with('author', 'category', 'tags')
-            ->where(['active' => true])
+            //  ->where(['active' => true])
             ->andWhere('id = :id', [':id' => $id])
             ->limit(1)
             ->one();
 
-        return $this->render('view', [
-            'model' => $model,
-            'selectedTags' => $selectedTags,
-            'tags' => $tags
-        ]);
+        if (is_null($model)) {
+            throw new NotFoundHttpException('Post not found');
+        } else {
+            return $this->render('view', [
+                'model' => $model,
+                //      'selectedTags' => $selectedTags,
+                //      'tags' => $tags
+            ]);
+        }
+
+
     }
 
     /**
@@ -83,9 +137,17 @@ class PostController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+
     public function actionCreate()
     {
         $model = new Post();
+
+
+        $model->active = true;
+        //$model->date = Yii::$app->formatter->asDatetime(date('Y-m-d H:i:s'));
+
+
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -97,6 +159,7 @@ class PostController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'categories' => $categories
             ]);
         }
     }

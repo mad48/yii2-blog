@@ -1,16 +1,18 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,600);
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,600);
 @import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,400italic);
-
+*/
 /*--------------------------------------
     elements
 --------------------------------------*/
 body {
-    font-family: 'Open Sans', sans-serif;
+  /*  font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Verdana', sans-serif;
     background: #F4F4F4;
 }
 
 span, p, input {
-    font-family: 'Merriweather', serif;
+    /*font-family: 'Merriweather', serif;*/
+    font-family: 'Verdana', sans-serif;
     line-height: 26px;
 }
 
@@ -20,7 +22,8 @@ img {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
+ /*   font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Verdana', sans-serif;
 }
 
 a {
@@ -330,7 +333,7 @@ a.more-link:hover {
 
 .social-share-title {
     padding: 9px 0;
-/*    font-style: italic;*/
+    /*    font-style: italic;*/
     font-size: 13px;
 }
 
@@ -1609,15 +1612,16 @@ p.go-back-home a:hover {
     border-color: royalblue;
 }
 
-
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
 #footer {
     position: absolute;
     bottom: 0;
@@ -1626,9 +1630,15 @@ body {
     height: 60px;
     background-color: #f5f5f5;
 }
-.post-content{
+
+.post-content {
     margin-bottom: 30px
 }
-.post-content .entry-content p{
+
+.post-content .entry-content p {
     text-align: justify;
+}
+
+.readmore {
+    margin-bottom: 20px
 }

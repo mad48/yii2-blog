@@ -59,7 +59,7 @@ class Category extends \yii\db\ActiveRecord
         $query = Post::find()->where(['category_id' => $id, 'active' => true]);
 
         $pageSize = 3;
-        
+
         $pagination = new Pagination([
             'totalCount' => $query->count(),
             'pageSize' => $pageSize,
@@ -76,5 +76,10 @@ class Category extends \yii\db\ActiveRecord
         $data['pagination'] = $pagination;
 
         return $data;
+    }
+
+    public static function getCategoryById($id)
+    {
+        return self::find()->where(['id' => $id])->limit(1)->one();
     }
 }

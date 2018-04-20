@@ -15,6 +15,27 @@ use common\models\Category;
 class BlogController extends Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['index', 'post', 'category'],
+                        'allow' => true,
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -41,10 +62,12 @@ class BlogController extends Controller
         $data = Post::getAll();
         $categories = Category::getAll();
 
+        $this->view->params['breadcrumbs'][] = ['label' => 'Блог'];
+
         return $this->render('index', [
             'posts' => $data['posts'],
             'pagination' => $data['pagination'],
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -53,6 +76,9 @@ class BlogController extends Controller
     {
         $post = Post::getOne($id);
         $categories = Category::getAll();
+
+        $this->view->params['breadcrumbs'][] = ['label' => 'Блог', 'url' => ['blog/']];
+        $this->view->params['breadcrumbs'][] = ['label' => $post->title];
 
         return $this->render('single', [
             'post' => $post,
@@ -65,10 +91,16 @@ class BlogController extends Controller
         $data = Category::getPostsByCategory($id);
         $categories = Category::getAll();
 
+        $curcat = Category::getCategoryById($id);
+
+        $this->view->params['breadcrumbs'][] = ['label' => 'Блог', 'url' => ['blog/']];
+        $this->view->params['breadcrumbs'][] = ['label' => $curcat->title];
+
         return $this->render('index', [
             'posts' => $data['posts'],
             'pagination' => $data['pagination'],
-            'categories' => $categories
+            'categories' => $categories,
+            'curcat' => $curcat
         ]);
     }
 

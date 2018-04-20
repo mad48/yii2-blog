@@ -61,10 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label' => 'Date',
-                'value' => Yii::$app->formatter->asDate($model->date, 'php:d.m.Y H:i')
+                'value' => Yii::$app->formatter->asDatetime($model->date)
             ],
 
 
+            [
+                'label' => 'Updated',
+                'value' => Yii::$app->formatter->asDatetime($model->updated)
+            ],
+            
         ],
     ]) ?>
 

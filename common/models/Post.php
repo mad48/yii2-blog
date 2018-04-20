@@ -6,12 +6,15 @@ use yii;
 use yii\behaviors\TimestampBehavior;
 use yii\data\Pagination;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
-use yii\behaviors\SluggableBehavior;
+
+use common\behaviors\DateBehavior;
 
 class Post extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
     public $tags_array;
 
     /**
@@ -30,15 +33,25 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'category_id'], 'integer'],
+            ['user_id', 'default', 'value' => Yii::$app->user->id],
+
             [['title'], 'required'],
             [['title', 'url'], 'string', 'max' => 255],
+            ['title', 'default', 'value' => 'New post'],
+
             ['url', 'unique', 'targetAttribute' => ['url'], 'message' => 'url must be unique'],
             [['content'], 'string'],
-            [['active'], 'string', 'max' => 1],
+            //  [['active'], 'string', 'max' => 1],
             //   [['date'], 'safe'],
-            //['date', 'datetime', 'format' => 'php:Y-m-d H:i:s'],
-            ['date', 'datetime', 'format' => 'php:d.m.Y H:i'],//Yii::$app->formatter->datetimeFormat
-            [['date'], 'default', 'value' => date('Y-m-d H:i:s')],
+            ['active', 'default', 'value' => self::STATUS_ACTIVE],
+
+            // [['date'], 'required'],
+            ['date', 'datetime', 'format' => Yii::$app->formatter->datetimeFormat],
+            //[['date'], 'default', 'value' => date('Y-m-d H:i:s'), 'on' => 'insert'],
+            ['date', 'default', 'value' => date('Y-m-d H:i:s')],
+
+            [['updated'], 'safe'],
+
             [['tags_array'], 'safe']
         ];
     }
@@ -57,6 +70,7 @@ class Post extends \yii\db\ActiveRecord
             'url' => 'Url',
             'active' => 'Active',
             'date' => 'Date',
+            'updated' => 'Updated',
             'tags_array' => 'Tags'
         ];
     }
@@ -74,23 +88,26 @@ class Post extends \yii\db\ActiveRecord
                 // 'immutable' => false,
                 'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
             ],
-            'timestamp' => [
-                'class' => TimestampBehavior::class,
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'date',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
-                ],
-                'value' => function () {
-                    return date('Y-m-d H:i:s', strtotime($this->date));
-                },
+
+            'date' => [
+                'class' => DateBehavior::class,
+                'createdDate' => 'date',
+                'updatedDate' => 'updated',
             ],
+
+
         ];
     }
 
+    /*    public function init() {
+            if($this->isNewRecord){
+                $this->loadDefaultValues();
+            }
+        }*/
 
     public function savePost()
     {
-        $this->user_id = Yii::$app->user->id;
+
         return $this->save();//убрать false иначе не работает SluggableBehavior
     }
 
@@ -233,6 +250,16 @@ class Post extends \yii\db\ActiveRecord
 
         $this->tags_array = $this->tags;
     }
+
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->user_id = Yii::$app->user->id;
+        }
+        return parent::beforeSave($insert);
+    }
+
 
     public function afterSave($insert, $changedAttributes)
     {

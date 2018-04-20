@@ -2,6 +2,9 @@
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
+
+//$this->params['breadcrumbs'][] = ['label' => $curcat->title];//, 'url' => ['blog/category', 'id' => $curcat->id], 'class' => 'external'
+
 ?>
 <!--main content start-->
 <div class="main-content">
@@ -33,7 +36,7 @@ use yii\widgets\LinkPager;
                                 <div class="btn-continue-reading text-center text-uppercase">
                                     <!-- <a href="<? /*= Url::toRoute(['post', 'id' => $post->id]); */ ?>" class="more-link">Read
                                         more</a>-->
-                                    <?= yii\bootstrap\Html::a('Read more', ['post', 'id' => $post->url], ['class' => 'btn btn-primary']) ?>
+                                    <?= yii\bootstrap\Html::a('Read more', ['post', 'id' => $post->url], ['class' => 'btn btn-primary readmore']) ?>
                                 </div>
                             </div>
                             <div class="social-share">

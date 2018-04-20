@@ -1,7 +1,6 @@
 <?php
 
-use yii\db\Schema;
-use jamband\schemadump\Migration;
+use yii\db\Migration;
 
 class m180322_102442_upgrade_tag_table extends Migration
 {

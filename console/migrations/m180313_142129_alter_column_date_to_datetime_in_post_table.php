@@ -12,7 +12,7 @@ class m180313_142129_alter_column_date_to_datetime_in_post_table extends Migrati
      */
     public function safeUp()
     {
-        $this->alterColumn('{{%post}}', 'date', $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'));
+        $this->alterColumn('{{%post}}', 'date', $this->dateTime()->notNull());//->defaultExpression('CURRENT_TIMESTAMP'));
     }
 
     /**

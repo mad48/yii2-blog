@@ -1,5 +1,7 @@
 <?php
 
+use common\models\User;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -28,8 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'user_id',
+            //'user_id',
+            [
+                'attribute' => 'user_id',
+                'value' => 'author.username',
+                'filter' => ArrayHelper::map(User::getAll(), 'id', 'username'),
+                'options' => ['width' => '200']
+            ],
+
             'category_id',
+            /*        [
+                        'attribute' => 'category_id',
+                        'value' => 'category.title'
+                    ],*/
             'title',
             //'content:ntext',
             //'url:text',
@@ -40,11 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
+
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
-                        return Html::a('upd', $url);
-
+                        if (Yii::$app->user->can('updatePost', ['post' => Post::findOne(['id' => $model->id])]))
+                            return Html::a('upd', $url);
+                        else return false;
                     }
                 ],
             ],

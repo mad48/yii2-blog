@@ -12,10 +12,13 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'dateFormat' => 'yyyy-MM-dd',
-            'datetimeFormat' => 'php:d.m.Y H:i',
+            'datetimeFormat' => 'php:d.m.Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'timeZone' => 'UTC',
             //'timeZone' => 'Europe/Moscow',

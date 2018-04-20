@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
+use common\widgets\BreadcrumbsMicrodata;
 use frontend\assets\AppAsset;
 
 AppAsset::register($this);
@@ -52,14 +52,14 @@ AppAsset::register($this);
                 <div class="i_con">
                     <ul class="nav navbar-nav text-uppercase">
                         <?php if (Yii::$app->user->isGuest): ?>
-                          <!-- <li><a href="<?/*= Url::toRoute(['site/login']) */?>">Login</a></li>-->
+                            <!-- <li><a href="<? /*= Url::toRoute(['site/login']) */ ?>">Login</a></li>-->
 
                             <li><a href="<?= Url::to(['@admin']) ?>">Login</a></li>
                             <li><a href="<?= Url::toRoute(['site/signup']) ?>">Register</a></li>
 
                         <?php else: ?>
 
-<!--                            <span style="float: left; margin-left: -120px; margin-top: 9px; "><a href="/backend/web/">Admin Panel</a></span>-->
+                            <!--                            <span style="float: left; margin-left: -120px; margin-top: 9px; "><a href="/backend/web/">Admin Panel</a></span>-->
                             <?= Html::beginForm(['/site/logout'], 'post')
                             . Html::submitButton(
                                 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -73,7 +73,28 @@ AppAsset::register($this);
             </div>
             <!-- /.navbar-collapse -->
         </div>
+
+        <?= BreadcrumbsMicrodata::widget([
+            'options' => [
+                'class' => 'breadcrumb',
+            ],
+            'homeLink' => [
+                'label' => Yii::t('yii', 'Home'),
+                'url' => ['/blog/index'],
+                'class' => 'home',
+                'template' => '<li>{link}</li>',
+            ],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'itemTemplate' => '<li>{link}</li>',
+            'activeItemTemplate' => '<li class="active">{link}</li>',
+            'tag' => 'ul',
+            'encodeLabels' => false
+        ]);
+        ?>
+
+
     </div>
+
     <!-- /.container-fluid -->
 </nav>
 
